@@ -27,7 +27,7 @@ Make sure you have Docker and Docker Compose installed on your machine. Then, fo
 1. Clone the repository & checkout the `feature/solution` branch:
     ```bash
     git clone
-    git checout feature/solution
+    git checkout feature/solution
     ```
 2. Create a `.env` file in the **ROOT directory** based on the provided `.env.example` file. (copied into /src and the MySQL container)
 3. Build and run the application using Docker Compose:
