@@ -2,7 +2,7 @@ name: Semgrep Code Scan
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/solution]
   pull_request:
     branches: [main]
 

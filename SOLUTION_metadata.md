@@ -42,7 +42,7 @@ The purpose of this file is to showcase my thought process and track my progress
 - **a) Secure the Root User**:
   - [x] Set a complex root password for the MySQL instance. - `MYSQL_RANDOM_ROOT_PASSWORD` is set to `yes` in `docker-compose.yml`
 - **b) Create a MySQL User with Limited Privileges**:
-  - [x] Create a new MySQL user that has only the necessary privileges (e.g., `SELECT`, `INSERT`, `UPDATE`) on the `releases` table. - alaa
+  - [x] Create a new MySQL user that has only the necessary privileges (e.g., `SELECT`, `INSERT`, `UPDATE`) on the `releases` table. - Refine!
   - [x] Update the Node.js application to use this new user for database interactions.
 
 ### 5. Secure the Docker Containers
@@ -81,9 +81,9 @@ The purpose of this file is to showcase my thought process and track my progress
 - POST /createRelease: Creates a new release for an application.
 - GET /listReleases: Lists all releases in the database.
 
-### To Refine
-- [ ] `package.json` - `start` script? Latest packages?
-- [ ] Best way for API key authentication
-- [ ] In `init.sql`, remove the user creation
-- [ ] .env
-- [ ] MYSQL_RANDOM_ROOT_PASSWORD -> can be retrieved from the logs
+### To Refine/document:
+- `package.json` - `start` script? Latest packages?
+- Best way for API key authentication
+- In `init.sql`, remove the user creation
+- .env
+- MYSQL_RANDOM_ROOT_PASSWORD -> can be retrieved from the logs
