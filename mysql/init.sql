@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 
-INSERT INTO users (username, password) VALUES ('admin', 'admin');
-INSERT INTO users (username, password) VALUES ('bart', 'cowabunga1');
+INSERT INTO users (username, password) VALUES ('admin', '${ADMIN_PASSWORD}');
+INSERT INTO users (username, password) VALUES ('bart', '${BART_PASSWORD}');
 
 CREATE DATABASE IF NOT EXISTS releases_db;
 USE releases_db;
@@ -23,3 +23,8 @@ CREATE TABLE IF NOT EXISTS releases (
     region VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+CREATE USER 'shane'@'%' IDENTIFIED BY '${DB_PASSWORD}';
+GRANT SELECT, INSERT, UPDATE ON releases_db.releases TO 'shane'@'%';
+FLUSH PRIVILEGES;

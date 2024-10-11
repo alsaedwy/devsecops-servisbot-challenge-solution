@@ -1,0 +1,11 @@
+{
+    "name": "devsecops-challenge-solution",
+    "version": "1.0.0",
+    "dependencies": {
+        "express": "latest",
+        "body-parser": "latest",
+        "mysql2": "latest",
+        "semver": "latest",
+        "dotenv": "latest"
+    }
+}
