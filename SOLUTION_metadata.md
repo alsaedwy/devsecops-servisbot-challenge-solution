@@ -46,11 +46,11 @@ The purpose of this file is to showcase my thought process and track my progress
   - [x] Update the Node.js application to use this new user for database interactions.
 
 ### 5. Secure the Docker Containers
-- [ ] Implement best practices for Docker security:
+- [x] Implement best practices for Docker security:
   - [x] Use a minimal base image for the Node.js application to reduce the attack surface.
-  - [ ] Run the Node.js application as a non-root user inside the container.
-  - [ ] Use Docker secrets to store sensitive information like database passwords.
-- [ ] Document any other security measures you implement for containerization.
+  - [x] Run the Node.js application as a non-root user inside the container.
+  - [x] Use Docker secrets to store sensitive information like database passwords.
+- [x] Document any other security measures you implement for containerization.
 - [x] Although it is best practice in production. You do not need to isolate the MySQL container from the host network.
 
 ### 6. Document the Solution
@@ -74,9 +74,6 @@ The purpose of this file is to showcase my thought process and track my progress
 - **Security**: Have appropriate measures been implemented to secure the application, database, and containers?
 - **Performance**: Is the drift detection logic optimized to handle large datasets efficiently?
 - **Documentation**: Are the steps to build, run, and test the application clearly documented?
-
-
-
 
 ## Alaa's Comments/Enhancements:
 - Fork VS clone
