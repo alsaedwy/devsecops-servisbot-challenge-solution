@@ -110,6 +110,8 @@ The following are the API endpoints available in the application:
 - All database interactions within the code ([main.js](src/main.js)) use parameterized queries.
 ### 5. Secure the Docker Containers
 - Used non-root user for both the database and node container.
+- >[!NOTE] 
+> Additions withing GitHub Actions are untested, but meant to be a demo of _one way of how I'd integrate code and container scanning tools._
 - Added some (untested) GitHub Workflows examples to scan the container image & code.
 
 #### These changes (1 -> 5) collectively enhance the application's security, maintainability, and deployment process.
