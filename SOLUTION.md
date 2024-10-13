@@ -69,23 +69,29 @@ The following are the API endpoints available in the application:
 1. `GET /releases`: Get all releases.
 2. `POST /release`: Create a new release.
 3. `GET /drift`: Get drift information "dynamically".
+----------------
 
 ## I have added the following already in the Pull Request, but I will add them here as well for visibility
 ### 1. Containerization
 - Created `Dockerfile` and `docker-compose.yml` in the main directory, as well as  `.env.template`  (more on that in SOLUTION.md)
-- To enable "npm install" command to run, created `package.json` and `package-lock.json` under `src` directory.
+- Used an Alpine Linux-based image to reduce vulnerabilities compared to a full Node.JS container image.
+- To enable "npm install" command to run, created `package.json` and `package-lock.json` under `src` directory. (package.json could use refinement; locking version to avoid breakages - but that would be up to discussion).
 - Made sure networking is working between both containers
 - Added healthcheck dependency to make sure the MySQL database is initialized before the app has started.
 
 
 ### 2. Implement the Drift Detection Logic
 - In `main.js` added `detectDrift` function that evaluates the missing latest version deployments across the applications **dynamically**, and uses sematic versioning ('semver') package to do so. 
-- Usage added in `SOLUTION.md`
+
 
 ### 3. Secure the Node.js Application
 **a) Authentication**:
-- Added authentication middleware for API key validation (`src/middleware/authentication.js`) and updated routes to use this middleware.
-- Implemented dynamic drift detection logic in `src/main.js`.
+- Added authentication middleware for API key validation (`src/middleware/authentication.js`) and updated the current three routes to use this middleware.
+> [!IMPORTANT]
+> The current mechanism is a very simple, primitive way of authentication that I wouldn't be using (at least not with .env file) - but went with due to time constraints, and the specification stating that a simple mechanism could be accepted.
+>
+> If I had more time, I would probably go for at least JWTs through [Bearer Authentication](https://swagger.io/docs/specification/v3_0/authentication/bearer-authentication/) and a Node package that maintains that with client ID/secret endpoint for generating the tokens.
+
 
 **b) Input Sanitization**:
 - Improved input validation and sanitation in `src/main.js` to prevent SQL injection attacks. 
@@ -93,10 +99,15 @@ The following are the API endpoints available in the application:
 ### 4. Secure the MySQL Database
 **a) Secure the Root User**:
 - Added the parameter `MYSQL_RANDOM_ROOT_PASSWORD`, since the `root` user gets created automatically
+**SQL Injection Prevention**:
+
+- Inputs are sanitized to prevent SQL injection attacks.
+- User inputs are validated and sanitized before being used in queries.
 
 **b) Create a MySQL User with Limited Privileges**:
 - Updated `mysql/init.sql` to use environment variables for user passwords and added a new MySQL user with limited privileges. (`shane` and `alaa`)
-- Parameterized passwords inside `init.sql` 
+- Parameterized passwords inside `init.sql`
+- All database interactions within the code ([main.js](src/main.js)) use parameterized queries.
 ### 5. Secure the Docker Containers
 - Used non-root user for both the database and node container.
 - Added some (untested) GitHub Workflows examples to scan the container image & code.
@@ -106,21 +117,13 @@ The following are the API endpoints available in the application:
 -----------
 ### 6. Document the Solution
 - Added `SOLUTION.md` -- making sure to follow the `README.md` guidance.
-- I've also added `SOLUTION_metadata.md` file where I've documented and broke down some of the 
+- I've also added `SOLUTION_metadata.md` file where I've documented and broke down some of the
 
 
-# Security Measures
-## Node.js Application
 
-**Authentication**:
-- API key authentication middleware is implemented on all endpoints.
-- API key is passed securely in request headers.
-- API key is validated against a list of allowed keys.
-- API key is stored securely in the `.env` file.
-- API key is not hardcoded in the application code.
-- API key is not exposed in logs or responses.
 
-**SQL Injection Prevention**:
-- All database interactions use parameterized queries.
-- Inputs are sanitized to prevent SQL injection attacks.
-- User inputs are validated and sanitized before being used in queries.
+
+
+
+
+
