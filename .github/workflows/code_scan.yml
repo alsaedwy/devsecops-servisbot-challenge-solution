@@ -1,0 +1,30 @@
+name: Code Scan
+
+on:
+  push:
+    branches: [main, feature/solution]
+  pull_request:
+    branches: [main]
+
+jobs:
+  scan:
+    name: Scan Node.js Code and Packages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint code
+        run: npx eslint ./src
+
+      - name: Run npm audit
+        run: npm audit --production --audit-level=moderate
